@@ -25,6 +25,7 @@ async function getAccessToken(): Promise<string> {
     return tokenInfo.accessToken;
   }
 
+  
   try {
     const response = await fetch("https://api.dropboxapi.com/oauth2/token", {
       method: "POST",
