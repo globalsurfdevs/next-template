@@ -15,7 +15,7 @@ interface SidebarProps {
 
 const menuGroups = [
   {
-    name: "MENU",
+    name: "",
     menuItems: [
       {
         icon: (
@@ -47,7 +47,7 @@ const menuGroups = [
         ),
         label: "Dashboard",
         route: "#",
-        children: [{ label: "eCommerce", route: "/" }],
+        // children: [{ label: "eCommerce", route: "/" }],
       },
       {
         icon: (
@@ -57,7 +57,7 @@ const menuGroups = [
 
         ),
         label: "About Us",
-        route: "/calendar",
+        route: "/admin/about",
       },
       {
         icon: (
@@ -67,7 +67,7 @@ const menuGroups = [
 
         ),
         label: "Contact Us",
-        route: "/profile",
+        route: "/admin/contact",
       },
       {
         icon: (
@@ -77,11 +77,11 @@ const menuGroups = [
 
         ),
         label: "Our Team",
-        route: "#",
-        children: [
-          { label: "Form Elements", route: "/forms/form-elements" },
-          { label: "Form Layout", route: "/forms/form-layout" },
-        ],
+        route: "/admin/team",
+        // children: [
+        //   { label: "Form Elements", route: "/forms/form-elements" },
+        //   { label: "Form Layout", route: "/forms/form-layout" },
+        // ],
       },
       {
         icon: (
@@ -91,7 +91,7 @@ const menuGroups = [
 
         ),
         label: "News",
-        route: "/tables",
+        route: "/admin/news",
       },
       {
         icon: (
@@ -208,7 +208,7 @@ const menuGroups = [
         route: "#",
         children: [
           { label: "Alerts", route: "/ui/alerts" },
-          { label: "Buttons", route: "/ui/buttons" },
+          { label: "Buttons", route: "/admin/ui/buttons" },
         ],
       },
       {
@@ -268,8 +268,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
           <Link href="/">
             <Image
-              width={176}
-              height={32}
+              width={100}
+              height={20}
               src={"/images/logo/logo-ic.png"}
               alt="Logo"
               priority
