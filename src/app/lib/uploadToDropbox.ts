@@ -12,9 +12,9 @@ if(!REFRESH_TOKEN){
   throw new Error("DROPBOX_REFRESH_TOKEN not in env")
 }
 
-if(!APP_SECRET){
-  throw new Error("DROPBOX_APP_SECRET not in env")
-}
+// if(!APP_SECRET){
+//   throw new Error("DROPBOX_APP_SECRET not in env")
+// }
 
 
 
