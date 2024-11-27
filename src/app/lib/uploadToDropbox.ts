@@ -1,7 +1,7 @@
 import { Dropbox } from "dropbox";
 
 const APP_KEY = process.env.NEXT_PUBLIC_DROPBOX_APP_KEY;
-const APP_SECRET = process.env.DROPBOX_APP_SECRET;
+const APP_SECRET = process.env.NEXT_PUBLIC_DROPBOX_APP_SECRET;
 const REFRESH_TOKEN = process.env.NEXT_PUBLIC_DROPBOX_REFRESH_TOKEN;
 
 if (!APP_KEY) {
