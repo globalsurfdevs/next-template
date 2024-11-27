@@ -4,9 +4,18 @@ const APP_KEY = process.env.NEXT_PUBLIC_DROPBOX_APP_KEY;
 const APP_SECRET = process.env.NEXT_PUBLIC_DROPBOX_APP_SECRET;
 const REFRESH_TOKEN = process.env.NEXT_PUBLIC_DROPBOX_REFRESH_TOKEN;
 
-if (!APP_KEY || !APP_SECRET || !REFRESH_TOKEN) {
-  throw new Error("DROPBOX_APP_KEY or DROPBOX_APP_SECRET is not set in environment variables");
+if (!APP_KEY) {
+  throw new Error("DROPBOX_APP_KEY not in env");
 }
+
+if(!APP_SECRET){
+  throw new Error("DROPBOX_APP_SECRET not in env")
+}
+
+if(!REFRESH_TOKEN){
+  throw new Error("DROPBOX_REFRESH_TOKEN not in env")
+}
+
 
 interface TokenInfo {
   accessToken: string;
