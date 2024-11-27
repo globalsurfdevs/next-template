@@ -34,6 +34,9 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData()
     const title = formData.get("title") as string
     const description = formData.get("description") as string
+    const metadataTitle = formData.get("metadataTitle") as string
+    const metadataDesc = formData.get("metadataDesc") as string
+
     const image = formData.get("image") as File | null
     let imagePath;
     if (image) {
@@ -54,7 +57,7 @@ export async function POST(req: NextRequest) {
 
         const { data, error } = await supabase
             .from('about')
-            .update({ title, description, image: imagePath })
+            .update({ title, description, image: imagePath,metadataTitle,metadataDesc })
             .eq('id', 1)
             .select()
 

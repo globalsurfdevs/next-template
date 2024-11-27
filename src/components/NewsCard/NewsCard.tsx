@@ -56,7 +56,7 @@ export default function NewsCard({data,setRefetch}:{
   }
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345,borderRadius:'0.75rem' }}>
       <CardMedia
         sx={{ height: 140 }}
         image={data.image}
@@ -73,11 +73,13 @@ export default function NewsCard({data,setRefetch}:{
       </CardContent>
       <div className='text-white flex w-full'>
         <div className='w-full flex text-2xl'>
-          <div className='bg-black w-1/2 items-center flex justify-center'>
-            <Link href={`/admin/news/edit-news/${data.id}`}><FaRegEdit/></Link>
+        <Link href={`/admin/news/edit-news/${data.id}`} className='bg-black w-1/2 items-center flex justify-center py-2'>
+          <div>
+            <FaRegEdit/>
           </div>
-          <div className='bg-red w-1/2 items-center flex justify-center'>
-            <MdDelete className='text-2xl' onClick={()=>handleDeleteNews(data.id)}/>
+          </Link>
+          <div className='bg-red w-1/2 items-center flex justify-center cursor-pointer' onClick={()=>handleDeleteNews(data.id)}>
+            <MdDelete className='text-2xl'/>
           </div>
           </div>
       </div>

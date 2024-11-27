@@ -10,10 +10,13 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import "react-quill/dist/quill.snow.css";
 
 type Inputs = {
     title: string
     description: string
+    metadataTitle:string
+    metadataDesc:string
 }
 
 
@@ -46,6 +49,8 @@ const About = ({ editMode }: {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
+        formData.append("metadataTitle",data.metadataTitle);
+        formData.append("metadataDesc",data.metadataDesc);
 
         if (imageFile) {
             formData.append("image", imageFile);
@@ -86,6 +91,8 @@ const About = ({ editMode }: {
                     if(data.about[0]){
                         setValue("title",data.about[0].title)
                         setValue("description",data.about[0].description)
+                        setValue("metadataTitle",data.about[0].metadataTitle)
+                        setValue("metadataDesc",data.about[0].metadataDesc)
                         if(data.about[0].image){
                             setPreviewImage(data.about[0].image as string);
                           }
@@ -145,7 +152,7 @@ const About = ({ editMode }: {
                     <div className='w-3/4 flex flex-col gap-5'>
                         <div className='w-full flex flex-col gap-2'>
                             <Label content='Title' />
-                            <input type="text" {...register("title",{required:"Title is required"})} className={'pl-2 w-full border py-1 text-black bg-transparent'} readOnly={!editMode}/>
+                            <input type="text" {...register("title",{required:"Title is required"})} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode}/>
                             {errors.title && <p className='mt-1 text-sm text-red'>{errors.title.message}</p>}
                         </div>
                         <div className='w-full flex flex-col gap-2'>
@@ -219,7 +226,25 @@ const About = ({ editMode }: {
                     {imageError && <p className="mt-1 text-sm text-red-600">{imageError}</p>}
 
                 </div>
+                
             </form >
+            
+            <div className='mt-6 flex flex-col gap-4'>
+                    <div className='font-extrabold text-xl'>
+                        Seo Section
+                    </div>
+                    <hr></hr>
+                    <div className='w-full flex flex-col gap-2'>
+                            <Label content='MetaData:Title' />
+                            <input type="text" {...register("metadataTitle")} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode}/>
+                            
+                        </div>
+                        <div className='w-full flex flex-col gap-2'>
+                            <Label content='MetaData:Description' />
+                            <input type="text" {...register("metadataDesc")} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode}/>
+                            
+                        </div>
+            </div>
         </>
     )
 }

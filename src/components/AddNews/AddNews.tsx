@@ -147,7 +147,7 @@ const AddNews = ({ editMode }: {
         <form className='w-3/4 flex flex-col gap-y-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='w-full'>
             <Label content='Title' />
-            <input type="text" {...register("title", { required: "Title is required" })} className={'pl-2 w-full border py-1 text-black bg-transparent'} />
+            <input type="text" {...register("title", { required: "Title is required" })} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} />
             {errors.title && <p className='mt-1 text-sm text-red'>{errors.title.message}</p>}
           </div>
           <div className='w-full'>
@@ -166,7 +166,7 @@ const AddNews = ({ editMode }: {
           </div>
           <div className='w-full flex gap-3'>
             <Label content='Date' />
-            <input type="date" {...register("date",{required:"Date is required"})}/>
+            <input type="date" {...register("date",{required:"Date is required"})} className='bg-transparent border-[1px]'/>
             {errors.date && <p className='mt-1 text-sm text-red'>{errors.date.message}</p>}
           </div>
 

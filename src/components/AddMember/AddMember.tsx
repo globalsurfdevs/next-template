@@ -148,22 +148,22 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       <form className='w-3/4 flex flex-col gap-y-5' onSubmit={handleSubmit(onSubmit)}>
             <div className='w-full flex flex-col gap-2'>
             <Label content='Name'/>
-            <input type="text" {...register("name",{required:"Title is required"})} className={'pl-2 w-full border py-1 text-black bg-transparent'}/>
+            <input type="text" {...register("name",{required:"Title is required"})} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'}/>
             {errors.name && <p className='mt-1 text-sm text-red'>{errors.name.message}</p>}
             </div>
             <div className='w-full flex flex-col gap-2'>
             <Label content='Position'/>
-            <input type="text" {...register("position",{required:"Title is required"})} className={'pl-2 w-full border py-1 text-black bg-transparent'}/>
+            <input type="text" {...register("position",{required:"Title is required"})} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'}/>
             {errors.position && <p className='mt-1 text-sm text-red'>{errors.position.message}</p>}
             </div>
             <div className='w-full flex flex-col gap-2'>
             <Label content='Email'/>
-            <input type="text" {...register("email",{required:"Title is required"})} className={'pl-2 w-full border py-1 text-black bg-transparent'}/>
+            <input type="text" {...register("email",{required:"Title is required"})} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'}/>
             {errors.email && <p className='mt-1 text-sm text-red'>{errors.email.message}</p>}
             </div>
             <div className='w-full flex flex-col gap-2'>
                 <Label content='Descrition'/>
-                <textarea className='pl-2 w-full border py-1' {...register("description",{required:"Description is required"})}></textarea>
+                <textarea className='rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none' {...register("description",{required:"Description is required"})}></textarea>
                 {errors.description && <p className='mt-1 text-sm text-red'>{errors.description.message}</p>}
             </div>
             

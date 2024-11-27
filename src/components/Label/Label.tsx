@@ -5,7 +5,7 @@ const Label = ({content,className}:{
     className?:string;
 }) => {
   return (
-    <label htmlFor="" className={className ? className : 'font-bold'}>{content}</label>
+    <label htmlFor="" className={className ? className : ''}>{content}</label>
   )
 }
 

@@ -54,15 +54,15 @@ export default function MediaCard({data,setRefetch}:{
   }
 
   return (
-    <div className='border'>
-      <CardMedia
+    <div className='border rounded-xl'>
+      <CardMedia className='rounded-t-xl'
         sx={{ height: 230 }}
         image={data.image}
         title="green iguana"
       />
       <div className='flex justify-between max-h-10'>
       <CardContent className='flex justify-center w-full items-center'>
-        <div className='text-xl'>
+        <div className='text-md'>
           {data.name}
         </div>
         {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -71,11 +71,13 @@ export default function MediaCard({data,setRefetch}:{
         </Typography> */}
       </CardContent>
       <div className='flex justify-around w-1/2 text-white'>
-        <div className='bg-black w-1/2 flex justify-center items-center'>
-        <Link href={`/admin/team/edit-member/${data.id}`}><FaRegEdit className='text-2xl'/></Link>
+      <Link href={`/admin/team/edit-member/${data.id}`} className='bg-black w-1/2 flex justify-center items-center'>
+        <div>
+        <FaRegEdit className='text-2xl'/>
         </div>
-        <div className='bg-red w-1/2 flex justify-center items-center'>
-        <MdDelete className='text-2xl' onClick={()=>handleDeleteMember(data.id)}/>
+        </Link>
+        <div className='bg-red w-1/2 flex justify-center items-center rounded-br-xl cursor-pointer' onClick={()=>handleDeleteMember(data.id)}>
+        <MdDelete className='text-2xl'/>
         </div>
       </div>
       </div>

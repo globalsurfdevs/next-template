@@ -241,3 +241,22 @@ input[type="search"]::-webkit-search-cancel-button {
 [x-cloak] {
     display: none !important;
 }
+
+
+.quill > * {
+    /* border-color: inherit !important; */
+    /* color: inherit !important; */
+  }
+  .quill > .ql-toolbar {
+    /* border radius of the toolbar */
+    border-radius: 10px 10px 0 0;
+  }
+  .quill > .ql-container {
+    /* border radius of the container and for font size*/
+    font-size: 15.5px;
+    border-radius: 0.375rem;
+    border: 2px solid black;
+    min-height: 100px;
+    color: rgb(28 36 52);
+    font-family: Satoshi, sans-serif;;
+  }

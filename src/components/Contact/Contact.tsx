@@ -152,17 +152,17 @@ const Contact = ({ editMode }: {
                 <div className='w-3/4 flex flex-col gap-5'>
                     <div className='w-full flex flex-col gap-2'>
                         <Label content='Page Heading' />
-                        <input type="text" {...register("pageHeading", { required: "Page heading is required" })} className={'pl-2 w-full border py-1 text-black bg-transparent'} readOnly={!editMode} />
+                        <input type="text" {...register("pageHeading", { required: "Page heading is required" })} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode} />
                         {errors.pageHeading && <p className='mt-1 text-sm text-red'>{errors.pageHeading.message}</p>}
                     </div>
                     <div className='w-full flex flex-col gap-2'>
                         <Label content='Email' />
-                        <input type="text" {...register("email", { required: "Title is required" })} className={'pl-2 w-full border py-1 text-black bg-transparent'} readOnly={!editMode} />
+                        <input type="text" {...register("email", { required: "Title is required" })} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode} />
                         {errors.email && <p className='mt-1 text-sm text-red'>{errors.email.message}</p>}
                     </div>
                     <div className='w-full flex flex-col gap-2'>
                         <Label content='Phone' />
-                        <input type="text" {...register("phone", { required: "Title is required" })} className={'pl-2 w-full border py-1 text-black bg-transparent'} readOnly={!editMode} />
+                        <input type="text" {...register("phone", { required: "Title is required" })} className={'rounded-md pl-4 w-full border py-1 text-black bg-transparent'} readOnly={!editMode} />
                         {errors.phone && <p className='mt-1 text-sm text-red'>{errors.phone.message}</p>}
                     </div>
                     <div>
