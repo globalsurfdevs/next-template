@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
+import MetaDataSection from '../MetaData/MetaDataSection';
 
 type Inputs = {
   name: string;
@@ -24,6 +25,8 @@ const AddMember = ({editMode}:{
   const [imageFile, setImageFile] = useState<null | File>(null)
   const [previewImage, setPreviewImage] = useState<null | string>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [metaTitle,setMetaTitle] = useState("")
+    const [metaDescription,setMetaDescription] = useState("")
     
   const router = useRouter()
 
@@ -46,6 +49,8 @@ const onSubmit: SubmitHandler<Inputs> = async (data) => {
   formData.append("position", data.position);
   formData.append("email",data.position);
   formData.append("description",data.description);
+  formData.append("metadataTitle",metaTitle);
+    formData.append("metadataDesc",metaDescription);
 
   if (imageFile) {
       formData.append("image", imageFile);
@@ -88,7 +93,9 @@ useEffect(()=>{
                   setValue("position",data.team[0].position)
                   setValue("email",data.team[0].email)
                   setValue("description",data.team[0].description)
-                  
+                  setMetaTitle(data.team[0].metadataTitle)
+                        setMetaDescription(data.team[0].metadataDesc)
+
                   if(data.team[0].image){
                       setPreviewImage(data.team[0].image as string);
                     }
@@ -141,11 +148,11 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
   return (
-    <>
-    <div className='w-full h-full flex gap-x-15 mt-5'>
+    <div className='py-5'>
+    <div className='w-full lg:h-[500px] lg:flex lg:gap-x-15 mt-5 grid grid-cols-1 h-full'>
       
         
-      <form className='w-3/4 flex flex-col gap-y-5' onSubmit={handleSubmit(onSubmit)}>
+      <form className='lg:w-3/4 lg:flex flex-col gap-y-5 col-span-1' onSubmit={handleSubmit(onSubmit)}>
             <div className='w-full flex flex-col gap-2'>
             <Label content='Name'/>
             <input type="text" {...register("name",{required:"Title is required"})} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'}/>
@@ -178,7 +185,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             
           </form>
         
-        <div className='h-1/2 w-1/4 flex justify-center items-center text-center'>
+        <div className='lg:h-1/2 lg:w-1/4 lg:flex justify-center items-center text-center col-span-1'>
                     <div
                         className="w-full h-full border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer overflow-hidden"
                         onDragOver={(e) => e.preventDefault()}
@@ -230,7 +237,9 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               </div>
           
           </div>
-    </>
+          <MetaDataSection editMode={editMode} metaTitle={metaTitle} metaDescription={metaDescription} setMetaTitle={setMetaTitle} setMetaDescription={setMetaDescription}/>
+
+    </div>
 
 )
 }

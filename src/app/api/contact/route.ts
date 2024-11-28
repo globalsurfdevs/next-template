@@ -29,6 +29,8 @@ export async function POST(req: NextRequest) {
     const email = formData.get("email") as string
     const phone = formData.get("phone") as string
     const address = formData.get("address") as string
+    const metadataTitle = formData.get("metadataTitle") as string
+    const metadataDesc = formData.get("metadataDesc") as string
 
     const image = formData.get("image") as File | null
 
@@ -51,7 +53,7 @@ export async function POST(req: NextRequest) {
 
         const { data, error } = await supabase
             .from('contact')
-            .update({ pageHeading, email,phone,address, image: imagePath })
+            .update({ pageHeading, email,phone,address, image: imagePath,metadataTitle,metadataDesc })
             .eq('id', 1)
             .select()
 

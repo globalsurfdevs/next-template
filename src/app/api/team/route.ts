@@ -51,6 +51,8 @@ export async function POST(req: NextRequest) {
     const position = formData.get("position") as string
     const email = formData.get("email") as string
     const description = formData.get("description") as string
+    const metadataTitle = formData.get("metadataTitle") as string
+    const metadataDesc = formData.get("metadataDesc") as string
 
     const image = formData.get("image") as File | null
     let imagePath;
@@ -74,7 +76,7 @@ export async function POST(req: NextRequest) {
             const { data, error } = await supabase
                 .from('team')
                 .insert([
-                    { name, position, email, description, image: imagePath },
+                    { name, position, email, description, image: imagePath,metadataTitle,metadataDesc },
                 ])
                 .select()
 
@@ -90,7 +92,7 @@ export async function POST(req: NextRequest) {
 
             const { data, error } = await supabase
                 .from('team')
-                .update({ name, position, email, description, image: imagePath })
+                .update({ name, position, email, description, image: imagePath,metadataTitle,metadataDesc })
                 .eq('id', id)
                 .select()
 

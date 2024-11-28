@@ -10,6 +10,7 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { toast } from 'sonner';
+import MetaDataSection from '../MetaData/MetaDataSection';
 
 type Inputs = {
     pageHeading: string
@@ -30,6 +31,8 @@ const Contact = ({ editMode }: {
     const [imageFile, setImageFile] = useState<null | File>(null)
     const [previewImage, setPreviewImage] = useState<null | string>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [metaTitle,setMetaTitle] = useState("")
+    const [metaDescription,setMetaDescription] = useState("")
 
     const router = useRouter()
 
@@ -49,6 +52,8 @@ const Contact = ({ editMode }: {
         formData.append("email", data.email);
         formData.append("phone", data.phone);
         formData.append("address", data.address);
+        formData.append("metadataTitle",metaTitle);
+        formData.append("metadataDesc",metaDescription);
 
         if (imageFile) {
             formData.append("image", imageFile);
@@ -91,6 +96,8 @@ const Contact = ({ editMode }: {
                         setValue("email", data.contact[0].email)
                         setValue("phone", data.contact[0].phone)
                         setValue("address", data.contact[0].address)
+                        setMetaTitle(data.contact[0].metadataTitle)
+                        setMetaDescription(data.contact[0].metadataDesc)
 
                         if (data.contact[0].image) {
                             setPreviewImage(data.contact[0].image as string);
@@ -143,7 +150,7 @@ const Contact = ({ editMode }: {
     };
 
     return (
-        <>
+        <div className='py-5'>
             <div className='w-full justify-end flex min-h-10'>
                 {!editMode && <Link href={'/admin/contact/edit-contact'} className="inline-flex items-center justify-center rounded-full bg-black px-10 py-2 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">Edit Contact Us</Link>}
             </div>
@@ -241,7 +248,9 @@ const Contact = ({ editMode }: {
                 </div>
             </div>
             </form>
-        </>
+
+            <MetaDataSection editMode={editMode} metaTitle={metaTitle} metaDescription={metaDescription} setMetaTitle={setMetaTitle} setMetaDescription={setMetaDescription}/>
+        </div>
     )
 }
 

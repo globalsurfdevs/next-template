@@ -12,6 +12,8 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
+import MetaDataSection from '../MetaData/MetaDataSection'
+import { toast } from 'sonner'
 
 type Inputs = {
   title: string
@@ -28,6 +30,8 @@ const AddNews = ({ editMode }: {
   const [imageFile, setImageFile] = useState<null | File>(null)
   const [previewImage, setPreviewImage] = useState<null | string>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [metaTitle,setMetaTitle] = useState("")
+    const [metaDescription,setMetaDescription] = useState("")
 
   const router = useRouter()
 
@@ -48,6 +52,8 @@ const AddNews = ({ editMode }: {
     formData.append("title", data.title);
     formData.append("content", data.content);
     formData.append("date",data.date)
+    formData.append("metadataTitle",metaTitle);
+        formData.append("metadataDesc",metaDescription);
 
     if (imageFile) {
       formData.append("image", imageFile);
@@ -64,10 +70,10 @@ const AddNews = ({ editMode }: {
       console.log(data);
 
       if (!data.error) {
-        alert("News added successfully")
+        toast.success(data.message)
         router.push('/admin/news')
       } else {
-        alert("Failed")
+        toast.error(data.error)
       }
       // Redirect to news list page
     } catch (error) {
@@ -123,6 +129,8 @@ const AddNews = ({ editMode }: {
                     setValue("title",data.news[0].title)
                     setValue("content",data.news[0].content)
                     setValue("date",data.news[0].date)
+                    setMetaTitle(data.news[0].metadataTitle)
+                        setMetaDescription(data.news[0].metadataDesc)
                     if(data.news[0].image){
                         setPreviewImage(data.news[0].image as string);
                       }
@@ -143,7 +151,8 @@ const AddNews = ({ editMode }: {
       {/* <div className='w-full justify-end flex min-h-10'>
         {!editMode && <Link href={'/admin/contact/edit-contact'} className="inline-flex items-center justify-center rounded-full bg-black px-10 py-2 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">Edit Contact Us</Link>}
     </div> */}
-      <div className='w-full h-full flex gap-x-15 mt-5'>
+      <div className='w-full h-full flex flex-col mt-5'>
+        <div className='w-full h-full flex gap-x-15'>
         <form className='w-3/4 flex flex-col gap-y-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='w-full'>
             <Label content='Title' />
@@ -178,7 +187,7 @@ const AddNews = ({ editMode }: {
             <button type='submit' disabled={isSubmitting}>{isSubmitting ? "Saving" : "Save"}</button>
           </button>}
         </form>
-        <div className='h-1/2 w-1/4 flex justify-center items-center text-center'>
+        <div className='h-full w-1/4 flex justify-center items-center text-center'>
         <div
                         className="w-full h-full border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer overflow-hidden"
                         onDragOver={(e) => e.preventDefault()}
@@ -228,6 +237,8 @@ const AddNews = ({ editMode }: {
                     </div>
                     {imageError && <p className="mt-1 text-sm text-red-600">{imageError}</p>}
         </div>
+        </div>
+      <MetaDataSection editMode={editMode} metaTitle={metaTitle} metaDescription={metaDescription} setMetaTitle={setMetaTitle} setMetaDescription={setMetaDescription}/>
       </div>
     </>
   )

@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import "react-quill/dist/quill.snow.css";
+import MetaDataSection from '../MetaData/MetaDataSection';
 
 type Inputs = {
     title: string
@@ -32,6 +33,8 @@ const About = ({ editMode }: {
     const [imageFile, setImageFile] = useState<null | File>(null)
     const [previewImage, setPreviewImage] = useState<null | string>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [metaTitle,setMetaTitle] = useState("")
+    const [metaDescription,setMetaDescription] = useState("")
 
     const router = useRouter()
 
@@ -49,8 +52,8 @@ const About = ({ editMode }: {
         const formData = new FormData();
         formData.append("title", data.title);
         formData.append("description", data.description);
-        formData.append("metadataTitle",data.metadataTitle);
-        formData.append("metadataDesc",data.metadataDesc);
+        formData.append("metadataTitle",metaTitle);
+        formData.append("metadataDesc",metaDescription);
 
         if (imageFile) {
             formData.append("image", imageFile);
@@ -91,8 +94,9 @@ const About = ({ editMode }: {
                     if(data.about[0]){
                         setValue("title",data.about[0].title)
                         setValue("description",data.about[0].description)
-                        setValue("metadataTitle",data.about[0].metadataTitle)
-                        setValue("metadataDesc",data.about[0].metadataDesc)
+                        setMetaTitle(data.about[0].metadataTitle)
+                        setMetaDescription(data.about[0].metadataDesc)
+                        console.log(data.about[0])
                         if(data.about[0].image){
                             setPreviewImage(data.about[0].image as string);
                           }
@@ -229,7 +233,7 @@ const About = ({ editMode }: {
                 
             </form >
             
-            <div className='mt-6 flex flex-col gap-4'>
+            {/* <div className='mt-6 flex flex-col gap-4'>
                     <div className='font-extrabold text-xl'>
                         Seo Section
                     </div>
@@ -244,7 +248,8 @@ const About = ({ editMode }: {
                             <input type="text" {...register("metadataDesc")} className={'rounded-md pl-4 w-full border-gray-300 border-[1px] py-3 text-black bg-transparent focus:outline-none'} readOnly={!editMode}/>
                             
                         </div>
-            </div>
+            </div> */}
+            <MetaDataSection editMode={editMode} metaTitle={metaTitle} metaDescription={metaDescription} setMetaTitle={setMetaTitle} setMetaDescription={setMetaDescription}/>
         </>
     )
 }
